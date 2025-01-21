@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="htmx-config" content='{"selfRequestsOnly": false}' />
+    <script src="../dependencies/htmx.min.js"></script>
+    <title>API Interaction Test</title>
+  </head>
+  <body>
+    <button hx-get="/users/restore" hx-swap="none">Restore User Data</button>
+    <button hx-get="/posts/restore" hx-swap="none">Restore Posts Data</button>
+    <br />
+    <br />
+
+    <div id="users">Users</div>
+
+    <button hx-get="/users" hx-trigger="load, every 1s" hx-target="#users">
+      Get
+    </button>
+
+    <br><br>
+
+    <div id="posts">Posts</div>
+
+    <button hx-get="/posts" hx-trigger="load, every 1s" hx-target="#posts">Get</button>
+  </body>
+</html>
