@@ -8,6 +8,8 @@ app.use(
   session({
     name: "session",
     keys: ["key1"],
+    sameSite: "lax",
+    httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000,
   })
 );
