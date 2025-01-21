@@ -22,7 +22,7 @@ const dataStore = function () {
 
   return {
     restorePosts: () => {
-      posts = defaultPosts;
+      //TODO
     },
 
     getPosts: () => {
@@ -43,9 +43,7 @@ const dataStore = function () {
 const data = dataStore();
 
 router.get("/api/v1/posts/restore", (req, res) => {
-  data.restorePosts();
-  console.log("Posts restored");
-  res.send(200);
+  res.send("Not implemented");
 });
 
 router.get("/api/v1/posts", (req, res) => {

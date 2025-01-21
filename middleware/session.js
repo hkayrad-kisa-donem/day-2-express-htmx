@@ -1,47 +1,34 @@
-const express = require("express");
-const router = express.Router();
-
-const authCheck = (req, res, next) => {
-  const ignorePaths = [
-    "/login",
-    "/login/",
+const sessionCheck = (req, res, next) => {
+  const noTokenIgnore = [
     "/dependencies/htmx.min.js",
-    "/auth/session/set",
-    "/auth/session/get",
-    "/auth/session/destroy",
+    "/login/",
+    "/register/",
+    "/auth/login",
+    "/auth/register",
+    "/auth/session"
   ];
 
-  /* if (ignorePaths.includes(req.path)) {
-    return next();
+  const withTokenRedirect = ["/login/", "/register/"];
+
+  console.log(withTokenRedirect.includes(req.path));
+  console.log(req.session.token !== undefined);
+
+  if (req.session.token !== undefined && withTokenRedirect.includes(req.path)) {
+    res.redirect("/");
+    return;
+  }
+  
+  if (noTokenIgnore.includes(req.path)) {
+    next();
+    return;
   }
 
-  if (!req.session.user) {
-    return res.redirect("/login");
-  } */
+  if (req.session.token === undefined) {
+    res.redirect("/login/");
+    return;
+  }
 
   next();
 };
 
-/* router.get("/auth/session/set", (req, res) => {
-  req.session.user = { name: "admin" };
-  req.session.save();
-  res.send("Session set").redirect("/");
-});
-
-router.get("/auth/session/get", (req, res) => {
-  const username = req.session.user.name;
-  res.send(`username: ${username}`);
-});
-
-router.get("/auth/session/destroy", (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Error destroying session:", err);
-    } else {
-      res.send("Session destroyed");
-    }
-  });
-}); */
-
-module.exports = [authCheck, router];
+module.exports = sessionCheck;

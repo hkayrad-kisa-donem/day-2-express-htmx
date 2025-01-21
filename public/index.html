@@ -8,14 +8,15 @@
     <title>API Interaction Test</title>
   </head>
   <body>
-    <button hx-get="/api/v1/users/restore" hx-swap="none">Restore User Data</button>
-    <button hx-get="/api/v1/posts/restore" hx-swap="none">Restore Posts Data</button>
+    <button hx-get="/api/v1/users/restore" hx-trigger="click">Restore User Data</button>
+    <button hx-get="/api/v1/posts/restore" hx-trigger="click">Restore Posts Data</button>
+    <button hx-get="/auth/logout">Logout</button>
     <br />
     <br />
 
     <div id="users">Users</div>
 
-    <button hx-get="/api/v1/users" hx-trigger="load, every 1s" hx-target="#users">
+    <button hx-get="/api/v1/users" hx-trigger="load, click" hx-target="#users">
       Get
     </button>
 
@@ -23,6 +24,6 @@
 
     <div id="posts">Posts</div>
 
-    <button hx-get="/api/v1/posts" hx-trigger="load, every 1s" hx-target="#posts">Get</button>
+    <button hx-get="/api/v1/posts" hx-trigger="load, click" hx-target="#posts">Get</button>
   </body>
 </html>

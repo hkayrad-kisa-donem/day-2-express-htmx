@@ -9,8 +9,14 @@
   </head>
   <body>
 
-    <button hx-get="/auth/session/set">Set Session</button>
-    <button hx-get="/auth/session/get">Get Session</button>
 
+    <form hx-post="/auth/login" hx-swap="innerHTML" hx-trigger="submit" hx-target="#status">
+      <input type="text" name="username" placeholder="Username"/>
+      <input type="password" name="password" placeholder="Password"/>
+      <button type="submit">Login</button>
+    </form>
+    <span id="status">asd</span>
+    <button hx-get="/auth/session" hx-target="#token">Get Session Token</button>
+    <span id="token"></span>
   </body>
 </html>

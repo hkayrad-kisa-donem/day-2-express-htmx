@@ -1,19 +1,21 @@
 const express = require("express");
-const session = require("express-session");
+const session = require("cookie-session");
 const helmet = require("helmet");
 
 const app = express();
 
 app.use(
   session({
-    secret: "testSecret",
-    resave: false,
-    saveUninitialized: false,
+    name: "session",
+    keys: ["key1"],
+    maxAge: 24 * 60 * 60 * 1000,
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(require("./middleware/session"));
 app.use(require("./middleware/whitelist"));
 app.use(helmet());
 
