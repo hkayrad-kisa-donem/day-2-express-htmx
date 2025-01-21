@@ -30,6 +30,7 @@ const dataStore = function () {
 
   return {
     //? FOR DEBUGGING PURPOSES
+    // It doesn't only revert posts, it re-initializes the data variable
     restoreUsers: () => {
       data = dataStore();
     },

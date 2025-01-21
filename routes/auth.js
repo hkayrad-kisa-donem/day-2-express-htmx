@@ -50,12 +50,16 @@ const dataStore = function () {
 
 const userData = dataStore();
 
+//? For debugging purposes
+// Hash the given credentials, 
+// No salting is done to simplify the process
 router.post("/auth/hash", (req, res) => {
   const { username, password } = req.body;
   const userHash = userData.hashUser(username, password);
   res.send(userHash);
 });
 
+// Register a user if is not already registered
 router.post("/auth/register", (req, res) => {
   const { username, password } = req.body;
   const isUserAdded = userData.addUser(username, password);
@@ -66,6 +70,7 @@ router.post("/auth/register", (req, res) => {
   res.send("User already registered");
 });
 
+// Login a user if the credentials are correct
 router.post("/auth/login", (req, res) => {
   console.log(req.body);
   const { username, password } = req.body;
@@ -79,6 +84,8 @@ router.post("/auth/login", (req, res) => {
   }
 });
 
+// Check if there is a session token on the request,
+// if so, send the token back to the client
 router.get("/auth/session", (req, res) => {
   if (req.session.token !== undefined) {
     res.send(`${req.session.token}`);
@@ -87,12 +94,14 @@ router.get("/auth/session", (req, res) => {
   res.send("No session token");
 });
 
+// Logout the user by setting the session token to undefined
 router.get("/auth/logout", (req, res) => {
   req.session.token = undefined;
   res.send("User logged out");
 });
 
 //? FOR DEBUGGING PURPOSES
+// Get all users in the system
 router.get("/auth/users", (req, res) => {
   const usersList = userData.getUsers();
   var usersTable = "<table><tr><th>Username</th><th>Hash</th></tr>";

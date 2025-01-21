@@ -17,14 +17,17 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Middleware
 app.use(require("./middleware/session"));
 app.use(require("./middleware/whitelist"));
 app.use(helmet());
 
+// Routes
 app.use(require("./routes/auth"));
 app.use(require("./routes/users"));
 app.use(require("./routes/posts"));
 
+// Static files in public
 app.use("/", express.static("public"));
 
 app.listen(80, () => {
