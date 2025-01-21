@@ -50,23 +50,23 @@ const dataStore = function () {
 
 const data = dataStore();
 
-router.get("/users/restore", (req, res) => {
+router.get("/api/v1/users/restore", (req, res) => {
   data.restoreUsers();
   console.log("Users restored");
-  res.send(200);
+  res.sendStatus(200);
 });
 
-router.get("/users", (req, res) => {
+router.get("/api/v1/users", (req, res) => {
   var usersTable = "<table><tr><th>ID</th><th>Name</th></tr>";
   data.getUsers().forEach((user) => {
-    usersTable += `<tr hx-target='next #status' hx-delete='/users/${user.id}/delete'><td>${user.id}</td><td>${user.name}</td></tr>`;
+    usersTable += `<tr hx-target='next #status' hx-delete='/api/v1/users/${user.id}/delete'><td>${user.id}</td><td>${user.name}</td></tr>`;
   });
   usersTable += "</table><span id='status'></span>";
 
   res.status(200).send(usersTable);
 });
 
-router.delete("/users/:id/delete", (req, res) => {
+router.delete("/api/v1/users/:id/delete", (req, res) => {
   const userId = req.params.id;
   const deletedUserId = data.deleteUser(parseInt(userId));
   res.status(200).send(`User ${deletedUserId} deleted`);

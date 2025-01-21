@@ -42,23 +42,27 @@ const dataStore = function () {
 
 const data = dataStore();
 
-router.get("/posts/restore", (req, res) => {
+router.get("/api/v1/posts/restore", (req, res) => {
   data.restorePosts();
   console.log("Posts restored");
   res.send(200);
 });
 
-router.get("/posts", (req, res) => {
+router.get("/api/v1/posts", (req, res) => {
   var postsTable = "<table><tr><th>ID</th><th>Title</th><th>Body</th></tr>";
   data.getPosts().forEach((post) => {
-    postsTable += `<tr hx-target='next #status' hx-delete='/posts/${post.id}/delete'><td>${post.id}</td><td>${post.title}</td><td>${post.body}</td></tr>`;
+    postsTable += `<tr hx-target='next #status' hx-delete='/api/v1/posts/${post.id}/delete'>
+                    <td>${post.id}</td>
+                    <td>${post.title}</td>
+                    <td>${post.body}</td>
+                  </tr>`;
   });
   postsTable += "</table><span id='status'></span>";
 
   res.status(200).send(postsTable);
 });
 
-router.delete("/posts/:id/delete", (req, res) => {
+router.delete("/api/v1/posts/:id/delete", (req, res) => {
   const postId = req.params.id;
   const deletedPostId = data.deletePost(parseInt(postId));
   console.log(`Post ${deletedPostId} deleted`);

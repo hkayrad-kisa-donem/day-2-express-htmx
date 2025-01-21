@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="htmx-config" content='{"selfRequestsOnly": false}' />
+    <script src="../dependencies/htmx.min.js"></script>
+    <title>Register</title>
+  </head>
+  <body>
+    <form hx-post="/auth/register" hx-target="#register-form">
+      <input type="text" name="username" placeholder="Username" />
+      <input type="password" name="password" placeholder="Password" />
+      <button type="submit">Register</button>
+    </form>
+
+    <div id="register-form"></div>
+  </body>
+</html>

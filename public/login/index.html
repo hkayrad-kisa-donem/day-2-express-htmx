@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="htmx-config" content='{"selfRequestsOnly": false}' />
+    <script src="../dependencies/htmx.min.js"></script>
+    <title>Login</title>
+  </head>
+  <body>
+
+    <button hx-get="/auth/session/set">Set Session</button>
+    <button hx-get="/auth/session/get">Get Session</button>
+
+  </body>
+</html>
