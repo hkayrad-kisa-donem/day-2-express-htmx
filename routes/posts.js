@@ -21,8 +21,9 @@ const dataStore = function () {
   ];
 
   return {
+    //? FOR DEBUGGING PURPOSES
     restorePosts: () => {
-      //TODO
+      data = dataStore();
     },
 
     getPosts: () => {
@@ -40,10 +41,12 @@ const dataStore = function () {
   };
 };
 
-const data = dataStore();
+var data = dataStore();
 
+//? FOR DEBUGGING PURPOSES
 router.get("/api/v1/posts/restore", (req, res) => {
-  res.send("Not implemented");
+  data.restorePosts();
+  res.send("Posts restored");
 });
 
 router.get("/api/v1/posts", (req, res) => {

@@ -29,8 +29,9 @@ const dataStore = function () {
   ];
 
   return {
+    //? FOR DEBUGGING PURPOSES
     restoreUsers: () => {
-      //TODO
+      data = dataStore();
     },
 
     getUsers: () => {
@@ -71,10 +72,12 @@ const dataStore = function () {
   };
 };
 
-const data = dataStore();
+var data = dataStore();
 
+//? FOR DEBUGGING PURPOSES
 router.get("/api/v1/users/restore", (req, res) => {
-  res.send("Not implemented");
+  data.restoreUsers();
+  res.send("Users restored");
 });
 
 router.get("/api/v1/users", (req, res) => {

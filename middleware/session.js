@@ -5,7 +5,8 @@ const sessionCheck = (req, res, next) => {
     "/register/",
     "/auth/login",
     "/auth/register",
-    "/auth/session"
+    "/auth/session",
+    "/auth/hash",
   ];
 
   const withTokenRedirect = ["/login/", "/register/"];
@@ -23,7 +24,7 @@ const sessionCheck = (req, res, next) => {
     return;
   }
 
-  if (req.session.token === undefined) {
+  if (req.session.token === undefined && !withTokenRedirect.includes(req.path)) {
     res.redirect("/login/");
     return;
   }
